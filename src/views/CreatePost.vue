@@ -1,57 +1,51 @@
 <template>
   <div>
-    <h1>Create Post Screen</h1>
-    <a href="/" class="btn btn-primary">Homepage</a>
+    <h1 class="text-light">Create Post Screen</h1>
+    <a href="/" class="btn btn-light mb-3">Homepage</a>
   </div>
   <div>
     <div class="form-floating">
   <textarea class="form-control" placeholder="Leave a comment here" id="postTitle" v-model="postTitle"></textarea>
   <label for="postTitle">Post Titel</label>
 </div>
-<div class="form-floating">
-  <textarea class="form-control" placeholder="Leave a comment here" id="postContent" style="height: 100px" v-model="postContent"></textarea>
-  <label for="postContent">Content</label>
-</div>
-    <button @click="doCreateNewPost" class="btn btn-primary">
+<div class="mt-2 mb-2">
+    <label class="text-light">Content</label>
+    <Editor v-model="content" />
+  </div>
+    <button @click="doCreateNewPost" class="btn btn-outline-light">
       Create new post
     </button>
   </div>
-  <div>
-    <editor-content :editor="editor" />
-  </div>
+  
 </template>
 
 <script setup>
 import { inject, ref } from 'vue';
-import { useEditor, EditorContent } from '@tiptap/vue-3'
-import StarterKit from '@tiptap/starter-kit'
+import Editor from '../components/Editor.vue'
+// Define reactive data
+
 
 const postTitle = ref('');
-const postContent = ref('');
+const content = ref('');
 const pb = inject('api');
 
 // Function to handle new post creation
 const doCreateNewPost = async () => {
   const data = {
     "Title": postTitle.value,
-    "Content": postContent.value,
+    "Content": content.value,
   };
 
   try {
     const record = await pb.collection('ForumPosts').create(data);
     console.log("Post created:", record);
     postTitle.value = "";
-    postContent.value = "";
+    content.value = "";
   } catch (error) {
     console.error("Failed to create post:", error);
   }
 };
 
-const editor = useEditor({
-  content: '<p>I’m running Tiptap with Vue.js. 🎉</p>',
-  extensions: [
-    StarterKit,
-  ],
-})
+
 </script>
 
