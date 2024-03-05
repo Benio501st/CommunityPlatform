@@ -22,8 +22,8 @@ const logoutUser = () => {
     >
       <a class="navbar-brand" href="/">
         <img
-          src="../assets/bespinian-logo.svg"
-          alt="bespinian.io"
+          src="../assets/logo.svg"
+          alt="logo"
           class="img-style"
         />
       </a>

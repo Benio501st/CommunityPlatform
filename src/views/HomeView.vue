@@ -4,7 +4,7 @@
       <ForumList />
     </div>
     <div v-else class="d-flex justify-content-center flex-wrap flex-lg-nowrap">
-      <img src="../assets/bespinian-logo.svg" alt="" class="logo" />
+      <img src="../assets/logo.svg" alt="" class="logo" />
       <div class="text-light">
         <h1>bespinian</h1>
         <h5>Cloud Native Citizens</h5>
